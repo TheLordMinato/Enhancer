@@ -10,8 +10,8 @@ from config import API_ID, API_HASH, BOT_TOKEN
 
 Bot = Client("Image Enhancer", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
-@app.on_message(filters.private & filters.command("start"))
-def start_command(_, msg):
+@Bot.on_message(filters.private & filters.command("start"))
+async def start_command(_, msg):
     await msg.reply_text("hello i am image enhancer bot send any image")
 
 @Bot.on_message(filters.private & filters.photo)
