@@ -18,9 +18,10 @@ async def start_command(_, msg):
 async def enhance_image(bot, msg):    
     if msg.photo:
         text = await msg.reply_text("Wait a minute")
-        photo = msg.photo[-1]
-        file = await bot.get_file(photo.file_id)
-        path = await file.download()
+        download_location = f"./DOWNLOADS/photos/{msg.from_user.id}.jpg"
+        path = await bor.download_media(
+                message=msg.photo, file_name=download_location
+        )
         img = Img.open(path)
         edit = await text.edit("Enhancing your image\n\nIt can take some time")
         emoji = await msg.reply("⚡️")
