@@ -1,4 +1,3 @@
-import os
 from os import getenv
 
 API_ID = int(getenv("API_ID", ""))
