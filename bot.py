@@ -3,6 +3,7 @@
 
 import asyncio
 from pyrogram import Client, filters, idle
+from pyrogram.enums import ChatAction
 from speedtest import Speedtest
 from PIL import Image as Img, ImageEnhance as Enhnc
 from io import BytesIO as Io
@@ -24,9 +25,12 @@ async def enhance_image(bot, msg):
         edit = await text.edit("Enhancing your image, It can take some time")
         emoji = await msg.reply("⚡️")
         enhancer = Enhnc.Contrast(img)
-        result = enhancer.enhance(1.5)
+        newimg = enhancer.enhance(1.1)
+        brightness = Enhnc.Brightness(newimg)
+        result = brightness.enhance(1.5)
+        await message.reply_chat_action(ChatAction.UPLOAD_PHOTO)
         enhncd = Io()
-        result.save(enhncd, format="JPEG")
+        result.save(enhncd, format="JPEG", quality=600)
         enhncd.seek(0)
         await msg.reply_photo(photo=enhncd)
         await edit.delete()
