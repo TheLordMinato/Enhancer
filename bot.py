@@ -19,11 +19,9 @@ async def enhance_image(bot, msg):
     if msg.photo:
         text = await msg.reply_text("Wait a minute")
         download_location = f"./DOWNLOADS/photos/{msg.from_user.id}.jpg"
-        path = await bor.download_media(
-                message=msg.photo, file_name=download_location
-        )
+        path = await bot.download_media(message=msg.photo, file_name=download_location)
         img = Img.open(path)
-        edit = await text.edit("Enhancing your image\n\nIt can take some time")
+        edit = await text.edit("Enhancing your image, It can take some time")
         emoji = await msg.reply("⚡️")
         enhancer = Enhnc.Contrast(img)
         result = enhancer.enhance(1.5)
