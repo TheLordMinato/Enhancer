@@ -2,13 +2,17 @@
     made by me 🗿"""
 
 import asyncio
-from pyrogram import Client, filters
+from pyrogram import Client, filters, idle
 from speedtest import Speedtest
 from PIL import Image as Img, ImageEnhance as Enhnc
 from io import BytesIO as Io
-from configs import API_ID, API_HASH, BOT_TOKEN
+from config import API_ID, API_HASH, BOT_TOKEN
 
 Bot = Client("Image Enhancer", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+
+@app.on_message(filters.private & filters.command("start"))
+def start_command(_, msg):
+    await msg.reply_text("hello i am image enhancer bot send any image")
 
 @Bot.on_message(filters.private & filters.photo)
 async def enhance_image(bot, msg):    
@@ -74,7 +78,7 @@ async def run_bot():
 .           ⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇  
 .             ⠙⠻⢿⣿⣿⣿⣿⠟⠁    
     """)    
-    await Bot.idle()
+    await idle()
     
 if __name__ == "__main__":
     """Run bot"""
