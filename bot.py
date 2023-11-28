@@ -36,8 +36,8 @@ async def enhance_image(bot, msg):
         img = img.resize((img.width * 2, img.height * 2), Img.ANTIALIAS)
         tensor = ToTensor()(img).unsqueeze(0).to(device)
         with torch.no_grad():
-            enhanced_tensor = model(img_tensor)
-        img = ToPILImage()(enhanced_tensor.squeeze(0).cpu())
+            enhanced = model(tensor)
+        img = ToPILImage()(enhanced.squeeze(0).cpu())
         img = img.filter(Filter.BLUR, )
         color = Enhnc.Color(img)
         img = color.enhance(1.1)
