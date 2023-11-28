@@ -2,3 +2,6 @@ pyrogram
 TgCrypto
 Pillow
 speedtest-cli
+torch 
+torchvision 
+requests 
