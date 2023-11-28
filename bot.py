@@ -16,6 +16,8 @@ Bot = Client("Image Enhancer", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_T
 
 #AI enhance model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+torch.hub.set_dir('./hub')
+torch.hub.download_url_to_file('https://raw.githubusercontent.com/zhangqianhui/PyTorch-SR/master/hub/checkpoints/esrgan/4x4_esrgan_psnr_28.848.pth', './hub/checkpoints/esrgan/4x4_esrgan_psnr_28.848.pth')
 model = torch.hub.load('zhangqianhui/PyTorch-SR', 'esrgan', model_scale=4).to(device).eval()
 
 #start Handler
